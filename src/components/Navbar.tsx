@@ -1,13 +1,25 @@
 import React, { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
 
 const Navbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
+  const { user, signOut } = useAuth();
 
   // 현재 경로에 따라 활성화된 링크 스타일 적용
   const isActive = (path: string) => {
     return location.pathname === path;
+  };
+
+  const handleLogout = async () => {
+    try {
+      await signOut();
+      navigate("/");
+    } catch (error) {
+      console.error("로그아웃 에러:", error);
+    }
   };
 
   return (
@@ -63,6 +75,38 @@ const Navbar: React.FC = () => {
               </Link>
             </div>
           </div>
+
+          <div className="hidden sm:ml-6 sm:flex sm:items-center">
+            {user ? (
+              <div className="flex items-center space-x-4">
+                <Link
+                  to="/mypage"
+                  className={`${
+                    isActive("/mypage")
+                      ? "text-indigo-700 font-semibold"
+                      : "text-gray-500 hover:text-gray-700"
+                  } text-sm`}
+                >
+                  마이페이지
+                </Link>
+                <span className="text-gray-300">|</span>
+                <button
+                  onClick={handleLogout}
+                  className="text-sm text-gray-500 hover:text-gray-700"
+                >
+                  로그아웃
+                </button>
+              </div>
+            ) : (
+              <Link
+                to="/login"
+                className="text-sm text-indigo-600 hover:text-indigo-800 font-medium"
+              >
+                로그인
+              </Link>
+            )}
+          </div>
+
           <div className="-mr-2 flex items-center sm:hidden">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -154,6 +198,44 @@ const Navbar: React.FC = () => {
             >
               우리 이야기
             </Link>
+
+            {/* 모바일 메뉴에 로그인/로그아웃 추가 */}
+            {user ? (
+              <>
+                <Link
+                  to="/mypage"
+                  className={`${
+                    isActive("/mypage")
+                      ? "bg-indigo-50 border-indigo-500 text-indigo-700"
+                      : "border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700"
+                  } block pl-3 pr-4 py-2 border-l-4 text-base font-medium`}
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  마이페이지
+                </Link>
+                <button
+                  onClick={() => {
+                    handleLogout();
+                    setIsMenuOpen(false);
+                  }}
+                  className="block w-full text-left pl-3 pr-4 py-2 border-l-4 border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 text-base font-medium"
+                >
+                  로그아웃
+                </button>
+              </>
+            ) : (
+              <Link
+                to="/login"
+                className={`${
+                  isActive("/login")
+                    ? "bg-indigo-50 border-indigo-500 text-indigo-700"
+                    : "border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700"
+                } block pl-3 pr-4 py-2 border-l-4 text-base font-medium`}
+                onClick={() => setIsMenuOpen(false)}
+              >
+                로그인
+              </Link>
+            )}
           </div>
         </div>
       )}

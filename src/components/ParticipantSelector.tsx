@@ -1,11 +1,7 @@
 import React from "react";
-import { FAMILY_MEMBERS } from "../constants";
+import { FAMILY_MEMBERS } from "../types/members";
 import { CheckIcon } from "./icons";
-
-interface ParticipantSelectorProps {
-  selectedParticipants: string[];
-  onToggleParticipant: (member: string) => void;
-}
+import { ParticipantSelectorProps } from "../types/props";
 
 const ParticipantSelector: React.FC<ParticipantSelectorProps> = ({
   selectedParticipants,

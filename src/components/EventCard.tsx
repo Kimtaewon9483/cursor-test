@@ -1,40 +1,11 @@
+// 이 컴포넌트는 EventList.tsx로 통합되었습니다.
+// 필요한 경우 이 파일을 삭제하고 import 문을 업데이트하세요.
+
 import React from "react";
-import { CategoryIcon } from "./icons";
-import CategoryBadge from "./CategoryBadge";
-import ParticipantBadge from "./ParticipantBadge";
-import { Event } from "../types";
+import { EventCardProps } from "../types/props";
 
-interface EventCardProps {
-  event: Event;
-}
-
-const EventCard: React.FC<EventCardProps> = ({ event }) => {
-  return (
-    <div className="py-4">
-      <div className="flex items-start">
-        <div className="flex-shrink-0 mt-1">
-          <span className="inline-flex items-center justify-center h-10 w-10 rounded-full bg-indigo-100 text-indigo-600">
-            <CategoryIcon category={event.category} />
-          </span>
-        </div>
-        <div className="ml-4 flex-1">
-          <div className="flex items-center justify-between">
-            <h3 className="text-lg font-medium text-gray-900">{event.title}</h3>
-            <span className="text-sm text-gray-500">{event.time}</span>
-          </div>
-          <p className="mt-1 text-sm text-gray-500">{event.description}</p>
-          <div className="mt-2">
-            <CategoryBadge category={event.category} />
-          </div>
-          <div className="mt-2 flex flex-wrap gap-1">
-            {event.participants.map((participant) => (
-              <ParticipantBadge key={participant} participant={participant} />
-            ))}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+const EventCard: React.FC<EventCardProps> = () => {
+  return null;
 };
 
 export default EventCard;

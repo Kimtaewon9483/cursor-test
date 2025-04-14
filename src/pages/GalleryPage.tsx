@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 interface GalleryImage {
   id: number;
@@ -95,6 +95,17 @@ const GalleryPage: React.FC = () => {
 
   const [selectedImage, setSelectedImage] = useState<GalleryImage | null>(null);
 
+  // 모달이 열렸을 때 배경 스크롤 방지
+  useEffect(() => {
+    if (selectedImage) {
+      // body에 modal-open 클래스 추가
+      document.body.classList.add("modal-open");
+    } else {
+      // 모달 닫힐 때 초기화
+      document.body.classList.remove("modal-open");
+    }
+  }, [selectedImage]);
+
   return (
     <div className="bg-gray-50 min-h-screen py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -156,14 +167,8 @@ const GalleryPage: React.FC = () => {
 
         {/* 이미지 모달 */}
         {selectedImage && (
-          <div
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-75"
-            onClick={() => setSelectedImage(null)}
-          >
-            <div
-              className="relative max-w-4xl w-full bg-white rounded-lg overflow-hidden"
-              onClick={(e) => e.stopPropagation()}
-            >
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-75 modal-container">
+            <div className="relative max-w-4xl w-full bg-white rounded-lg overflow-hidden gallery-modal-content">
               <button
                 className="absolute top-4 right-4 bg-white rounded-full p-2 shadow-lg z-10"
                 onClick={() => setSelectedImage(null)}

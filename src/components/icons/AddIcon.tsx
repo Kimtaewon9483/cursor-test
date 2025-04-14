@@ -1,10 +1,7 @@
 import React from "react";
+import { IconProps } from "../../types/props";
 
-interface AddIconProps {
-  className?: string;
-}
-
-const AddIcon: React.FC<AddIconProps> = ({ className = "w-5 h-5" }) => {
+const AddIcon: React.FC<IconProps> = ({ className = "w-5 h-5" }) => {
   return (
     <svg
       className={className}

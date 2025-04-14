@@ -7,23 +7,32 @@ import HomePage from "./pages/HomePage";
 import GalleryPage from "./pages/GalleryPage";
 import CalendarPage from "./pages/CalendarPage";
 import StoriesPage from "./pages/StoriesPage";
+import { AuthProvider } from "./contexts/AuthContext";
+import Login from "./components/Login";
+import MyPage from "./pages/MyPage";
+import GroupDetailPage from "./pages/GroupDetailPage";
 
 function App() {
   return (
-    <div className="App">
-      <Router>
-        <Navbar />
-        <main>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/gallery" element={<GalleryPage />} />
-            <Route path="/calendar" element={<CalendarPage />} />
-            <Route path="/stories" element={<StoriesPage />} />
-          </Routes>
-        </main>
-        <Footer />
-      </Router>
-    </div>
+    <AuthProvider>
+      <div className="App">
+        <Router>
+          <Navbar />
+          <main>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/gallery" element={<GalleryPage />} />
+              <Route path="/calendar" element={<CalendarPage />} />
+              <Route path="/stories" element={<StoriesPage />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/mypage" element={<MyPage />} />
+              <Route path="/group/:groupId" element={<GroupDetailPage />} />
+            </Routes>
+          </main>
+          <Footer />
+        </Router>
+      </div>
+    </AuthProvider>
   );
 }
 

@@ -1,16 +1,5 @@
-import React, { ReactNode } from "react";
-
-type ButtonVariant = "primary" | "secondary" | "outline";
-
-interface ButtonProps {
-  children: ReactNode;
-  onClick?: () => void;
-  variant?: ButtonVariant;
-  className?: string;
-  type?: "button" | "submit" | "reset";
-  disabled?: boolean;
-  icon?: ReactNode;
-}
+import React from "react";
+import { ButtonProps, ButtonVariant } from "../types/props";
 
 const Button: React.FC<ButtonProps> = ({
   children,
@@ -21,7 +10,7 @@ const Button: React.FC<ButtonProps> = ({
   disabled = false,
   icon,
 }) => {
-  const variantClasses = {
+  const variantClasses: Record<ButtonVariant, string> = {
     primary: "bg-indigo-600 text-white hover:bg-indigo-700 shadow-sm",
     secondary:
       "bg-white text-gray-700 border-gray-300 hover:bg-gray-50 shadow-sm",

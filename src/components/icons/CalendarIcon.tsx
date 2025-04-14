@@ -1,12 +1,7 @@
 import React from "react";
+import { IconProps } from "../../types/props";
 
-interface CalendarIconProps {
-  className?: string;
-}
-
-const CalendarIcon: React.FC<CalendarIconProps> = ({
-  className = "h-12 w-12",
-}) => {
+const CalendarIcon: React.FC<IconProps> = ({ className = "h-12 w-12" }) => {
   return (
     <svg
       className={className}

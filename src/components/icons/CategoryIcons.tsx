@@ -1,9 +1,5 @@
 import React from "react";
-
-interface CategoryIconProps {
-  category: string;
-  className?: string;
-}
+import { CategoryIconProps } from "../../types/props";
 
 const CategoryIcon: React.FC<CategoryIconProps> = ({
   category,

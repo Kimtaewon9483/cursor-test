@@ -1,9 +1,5 @@
-import React, { ReactNode } from "react";
-
-interface EmptyStateProps {
-  icon: ReactNode;
-  message: string;
-}
+import React from "react";
+import { EmptyStateProps } from "../types/props";
 
 const EmptyState: React.FC<EmptyStateProps> = ({ icon, message }) => {
   return (

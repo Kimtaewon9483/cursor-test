@@ -1,10 +1,7 @@
 import React from "react";
+import { IconProps } from "../../types/props";
 
-interface CheckIconProps {
-  className?: string;
-}
-
-const CheckIcon: React.FC<CheckIconProps> = ({ className = "h-4 w-4" }) => {
+const CheckIcon: React.FC<IconProps> = ({ className = "h-4 w-4" }) => {
   return (
     <svg
       className={className}

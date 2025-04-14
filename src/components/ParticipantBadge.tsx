@@ -1,8 +1,5 @@
 import React from "react";
-
-interface ParticipantBadgeProps {
-  participant: string;
-}
+import { ParticipantBadgeProps } from "../types/props";
 
 const ParticipantBadge: React.FC<ParticipantBadgeProps> = ({ participant }) => {
   return (

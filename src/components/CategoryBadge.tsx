@@ -1,9 +1,5 @@
 import React from "react";
-
-interface CategoryBadgeProps {
-  category: string;
-  className?: string;
-}
+import { CategoryBadgeProps } from "../types/props";
 
 const CategoryBadge: React.FC<CategoryBadgeProps> = ({
   category,
