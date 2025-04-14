@@ -56,11 +56,20 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       // 잠시 대기하여 세션 정리가 완료되도록 함
       await new Promise((resolve) => setTimeout(resolve, 300));
 
+      // 현재 도메인 기반으로 리다이렉트 URL 결정
+      // Vercel 도메인인 경우 해당 URL 사용, 아니면 현재 origin 사용
+      const isVercelDomain = window.location.origin.includes("vercel.app");
+      const redirectUrl = isVercelDomain
+        ? "https://cursor-test-alpha.vercel.app/auth/callback"
+        : `${window.location.origin}/auth/callback`;
+
+      console.log("사용할 리다이렉트 URL:", redirectUrl);
+
       // 이제 새로운 로그인 시도
       const { data, error } = await supabase.auth.signInWithOAuth({
         provider: "google",
         options: {
-          redirectTo: window.location.origin,
+          redirectTo: redirectUrl,
         },
       });
 
